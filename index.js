@@ -15,14 +15,26 @@ submitBtn.addEventListener('click',onsubmit);
     
 
 document.addEventListener("DOMContentLoaded", () => {
-const localStorageObj=localStorage;
-const localStorageKeys=Object.keys(localStorageObj);
-for(var i=0;i<localStorageKeys.length;i++){
-    const key=localStorageKeys[i];
-    const userDetailsString=localStorageObj[key];
-    const userDetailsObj=JSON.parse(userDetailsString);
-    showUserOnScreen(userDetailsObj);
-}
+axios.get("https://crudcrud.com/api/e080933948fb4e06bac13c3d27956cf5/appointmentData")
+.then((response)=>{
+    console.log(response)
+
+    for(var i=0;i<response.data.length;i++){
+        showUserOnScreen(response.data[i])
+    }
+})
+.catch((error)=>{
+    console.log(error)
+})
+
+// const localStorageObj=localStorage;
+// const localStorageKeys=Object.keys(localStorageObj);
+// for(var i=0;i<localStorageKeys.length;i++){
+//     const key=localStorageKeys[i];
+//     const userDetailsString=localStorageObj[key];
+//     const userDetailsObj=JSON.parse(userDetailsString);
+//     showUserOnScreen(userDetailsObj);
+// }
 });
 
 function onsubmit(e){
